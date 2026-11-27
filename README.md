@@ -1,4 +1,7 @@
-# Module 1 -- Digital Representation, Colour & Memory (reference repo)
+Praktikum Grafika Komputer Modul 2
+
+Nama / NIM: Satrio Putra Pratama / 20241337035
+Program Studi: S1 Informatika, Universitas Muhammadiyah Surabaya
 
 Course: *Grafika Komputer / Computer Graphics* (`25MP7716G030`), S1 Informatika
 semester 5. Companion to `../../Module1_EN.tex`.
