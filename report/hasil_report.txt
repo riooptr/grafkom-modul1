@@ -1,0 +1,47 @@
+.venv/bin/python make_data.py --out data
+wrote 21 images + manifest.csv to data/  (2827425 bytes on disk)
+.venv/bin/python gamma_resize_bug.py --fix --out report/
+== after fix (decode -> average -> encode) ==
+root cause : the 2x2 mean was taken on sRGB codes, not linear light.
+the fix    : one line -- srgb_to_linear() before .mean(), linear_to_srgb() after.
+mean abs difference : 20.2 code levels
+max  abs difference : 42 code levels
+PSNR(naive vs linear) : 21.5 dB
+SSIM(naive vs linear) : 0.962
+wrote report images to report//
+.venv/bin/python resample.py --image data/relief.ppm --factor 2 --methods naive-box,linear-box --out report/
+wrote report/relief_naive-box.ppm
+wrote report/relief_linear-box.ppm
+mean abs difference : 20.2 code levels
+max  abs difference : 42 code levels
+PSNR(naive vs linear): 21.5 dB
+SSIM(naive vs linear): 0.962
+.venv/bin/python format_compare.py --image data/crop_hifreq.ppm --out report/
+image crop_hifreq.ppm  128x128  decoded = 49,152 bytes
+
+format                bytes    ratio   PSNR vs original
+PNG                  38,264    1.28x                inf
+WebP-lossless        18,008    2.73x                inf
+JPG q92              12,223    4.02x            30.9 dB
+WebP q92             12,408    3.96x            31.5 dB
+JPG q75               7,994    6.15x            26.9 dB
+JPG q40               5,628    8.73x            22.1 dB
+AVIF q40              1,721   28.56x            23.2 dB
+
+wrote report/formats_crop_hifreq.md
+.venv/bin/python format_compare.py --image data/crop_smooth.ppm --out report/
+image crop_smooth.ppm  118x118  decoded = 41,772 bytes
+
+format                bytes    ratio   PSNR vs original
+PNG                   6,463    6.46x                inf
+WebP-lossless         4,894    8.54x                inf
+JPG q92               1,791   23.32x            49.9 dB
+WebP q92                508   82.23x            48.3 dB
+JPG q75               1,283   32.56x            46.7 dB
+JPG q40               1,149   36.36x            42.8 dB
+AVIF q40                404  103.40x            46.0 dB
+
+wrote report/formats_crop_smooth.md
+.venv/bin/python report.py
+wrote report/budget.md and report/report.html
+open report/report.html

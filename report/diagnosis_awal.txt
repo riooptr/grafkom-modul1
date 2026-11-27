@@ -1,0 +1,8 @@
+== evidence (no fix applied) ==
+buggy mean code    : 144.20
+correct mean code  : 164.44
+correct - buggy    : mean +20.24,  min +4,  max +42
+fraction of pixels where buggy is darker : 100.0%
+PSNR(buggy vs correct) : 21.5 dB   SSIM : 0.962
+
+Write your one-paragraph diagnosis now, THEN run with --fix.

@@ -1,0 +1,23 @@
+.venv/bin/python tests.py
+ppm_io self-test OK  (P5 and P6 round-trip)
+OK   ppm_io round-trip
+round-trip max error : 1.1102230246251565e-16
+E4  correct mid-grey code : gamma-2 = 180.3   real sRGB = 187.5   naive (255+0)/2 = 127.5
+code 0.5 -> linear light  : gamma-2 = 0.250   real sRGB = 0.214
+OK   srgb round-trip + E4
+OK   make_data running patch (mean 54)
+boxblur self-test OK  (mean=54; 2x2 result matches Example E1; 3x3 preserves a constant)
+OK   boxblur: E1 2x2 result + mean 54
+resample self-test OK  (nearest==a_ij; lerp 25/50/75; checker naive=128 vs correct=188)
+OK   resample: nearest==a_ij, bilinear 25/50/75, checker split
+histogram self-test OK  (max err vs numpy.histogram = 0 for bins 2..32)
+OK   histogram: max err vs numpy = 0
+luma self-test OK  (E5: correct~126, naive-weights~118, avg=117; flat 128 -> 128)
+OK   luma: E5 numbers + flat-grey identity
+metrics self-test OK  (psnr(equal)=inf; ssim(equal)=1; psnr for a 52-level shift = 13.81 dB)
+OK   metrics: psnr/ssim sanity
+cvd self-test OK  (red/green gap 242 -> deuter 128 / protan 93; blue/orange gap 289 largely preserved)
+OK   cvd: red/green collapse under deuteranopia
+OK   budget: E6/E7 exact to the byte
+
+ALL CHECKS PASSED
